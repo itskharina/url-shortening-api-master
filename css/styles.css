@@ -67,6 +67,9 @@ button {
   border: none;
   cursor: pointer;
 }
+button:active {
+  transform: translateY(4px);
+}
 
 p {
   font-size: 1.2rem;
@@ -104,23 +107,80 @@ p {
   margin-bottom: 5rem;
 }
 
-.shorten-link {
+.links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f0f1f6;
+  padding-top: 6rem;
+  list-style-type: none;
+  gap: 10px;
+}
+.links li {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px 25px;
+}
+.links li a {
+  text-decoration: none;
+  font-weight: 600;
+  color: hsl(180, 66%, 49%);
+}
+.links li button {
+  border-radius: 6px;
+  background-color: hsl(180, 66%, 49%);
+  color: white;
+  margin-left: 10px;
+  width: 100px;
+}
+.links li .left {
+  width: 50%;
+}
+.links li .left p {
+  font-weight: 500;
+  color: hsl(255, 11%, 22%);
+  font-size: 1rem;
+}
+
+.shorten-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: normal;
   justify-content: center;
-  gap: 15px;
   position: absolute;
   z-index: 3;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: hsl(257, 27%, 26%);
   width: 50%;
+  min-width: 826px;
   height: 140px;
   border-radius: 10px;
   background-image: url(../images/bg-shorten-desktop.svg);
 }
+.shorten-link .input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+.shorten-link p {
+  margin-left: 55px;
+  margin-top: 8px;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: red;
+}
 .shorten-link input {
+  grid-area: input;
   width: 700px;
   height: 45px;
   border: none;
@@ -140,6 +200,7 @@ p {
   color: hsl(257, 7%, 63%);
 }
 .shorten-link button {
+  grid-area: button;
   background-color: hsl(180, 66%, 49%);
   color: white;
   border-radius: 10px;
@@ -231,7 +292,7 @@ p {
 }
 
 .boost {
-  background-color: hsl(260, 8%, 14%);
+  background-color: hsl(257, 27%, 26%);
   background-image: url(../images/bg-boost-desktop.svg);
   background-size: cover;
   background-repeat: no-repeat;

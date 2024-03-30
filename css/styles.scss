@@ -90,6 +90,10 @@ button {
     border-radius: 50px;
     border: none;
     cursor: pointer;
+
+    &:active {
+        transform: translateY(4px);
+    }
 }
 
 p {
@@ -137,21 +141,80 @@ p {
 
 // SHORTEN LINK 
 
+.links {
+    @include flex(column);
+    background-color: #f0f1f6;
+    padding-top: 6rem;
+    list-style-type: none; 
+    gap: 10px; 
+
+    li {
+        @include flex(row);
+        justify-content: space-between; 
+        width: 50%;
+        border-radius: 10px;
+        background-color: white;
+        padding: 10px 25px;
+
+        a {
+            text-decoration: none;
+            font-weight: 600;
+            color: $cyan;
+        }
+
+        button {
+            border-radius: 6px;
+            background-color: $cyan;
+            color: white;
+            margin-left: 10px;
+            width: 100px;
+        }
+
+        .left {
+            width: 50%;
+            
+            p {
+                font-weight: 500;
+                color: $dark-blue;
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
 .shorten-link {
-    @include flex(row);
+    @include flex(column);
+    align-items: normal;
     justify-content: center;
-    gap: 15px;
     position: absolute;
     z-index: 3;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: $violet;
     width: 50%;
+    min-width: 826px;
     height: 140px;
     border-radius: 10px;
     background-image: url(../images/bg-shorten-desktop.svg);
 
+    .input {
+        @include flex(row);
+        justify-content: center;
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    p {
+        margin-left: 55px;
+        margin-top: 8px;
+        font-size: 0.9rem;
+        font-style: italic;
+        color: red;
+
+    }
+    
     input {
+        grid-area: input;
         width: 700px;
         height: 45px;
         border: none;
@@ -170,6 +233,7 @@ p {
     }
 
     button {
+        grid-area: button;
         background-color: $cyan;
         color: white;
         border-radius: 10px;
@@ -180,6 +244,7 @@ p {
         }
     }
 }
+
 
 /// SECOND PAGE
 
@@ -279,7 +344,7 @@ p {
 // BOOST DIV
 
 .boost {
-    background-color: $dark-violet;
+    background-color: $violet;
     background-image: url(../images/bg-boost-desktop.svg);
     background-size: cover;
     background-repeat: no-repeat;
