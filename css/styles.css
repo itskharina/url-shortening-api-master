@@ -122,6 +122,7 @@ p {
   align-items: center;
   justify-content: space-between;
   width: 50%;
+  min-width: 898px;
   border-radius: 10px;
   background-color: white;
   padding: 10px 25px;
@@ -139,12 +140,23 @@ p {
   width: 100px;
 }
 .links li .left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   width: 50%;
+  gap: 20px;
 }
 .links li .left p {
   font-weight: 500;
   color: hsl(255, 11%, 22%);
   font-size: 1rem;
+}
+.links li .left button {
+  margin-left: 0;
+  padding: 0;
+  width: 10px;
+  background-color: white;
+  color: hsl(180, 66%, 49%);
 }
 
 .shorten-link {

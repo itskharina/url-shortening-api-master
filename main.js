@@ -4,7 +4,6 @@ const shortenBtn = document.querySelector('.shorten');
 const copyBtn = document.querySelector('.copy');
 const linksContainer = document.querySelector('.links');
 const error = document.querySelector('.error');
-
 const existingUrls = JSON.parse(localStorage.getItem('existingUrls')) || [];
 
 async function shortenUrl(url) {
@@ -30,13 +29,17 @@ async function displayData(string) {
     input.style.border = 'none';
     error.style.display = 'none';
   }
+  input.value = '';
+
   const { data, url } = await shortenUrl(string);
   existingUrls.push({ url, shortenedUrl: data.shorturl });
   localStorage.setItem('existingUrls', JSON.stringify(existingUrls));
+  const index = existingUrls.length - 1;
 
   display.innerHTML += `
   <li>
     <div class='left'>
+      <button class='delete' data-index='${index}'>X</button>
       <p>${url}</p>
     </div>
     <div class='right'>
@@ -44,6 +47,11 @@ async function displayData(string) {
       <button class='copy'>Copy</button>
     </div>
   </li>`;
+
+  const newDeleteButton = display.querySelector(
+    `.delete[data-index='${index}']`
+  );
+  newDeleteButton.addEventListener('click', deleteLink);
 }
 
 function isValidUrl(url) {
@@ -64,8 +72,17 @@ linksContainer.addEventListener('click', function (e) {
     const link = e.target.closest('li').querySelector('a');
 
     navigator.clipboard.writeText(link.textContent);
+    e.target.textContent = 'Copied!';
+    e.target.style.backgroundColor = '#232127';
   }
 });
+
+function deleteLink(e) {
+  const index = e.target.dataset.index;
+  e.target.parentElement.parentElement.remove();
+  existingUrls.splice(index, 1);
+  localStorage.setItem('existingUrls', JSON.stringify(existingUrls));
+}
 
 function loadFromLocalStorage() {
   if (existingUrls) {
@@ -73,6 +90,7 @@ function loadFromLocalStorage() {
       display.innerHTML += `
       <li>
         <div class='left'>
+          <button class='delete'>X</button>
           <p>${url}</p>
         </div>
         <div class='right'>
@@ -82,6 +100,11 @@ function loadFromLocalStorage() {
       </li>`;
     });
   }
+
+  const existingDeleteBtns = document.querySelectorAll('.delete');
+  existingDeleteBtns.forEach((button) => {
+    button.addEventListener('click', deleteLink);
+  });
 }
 
 loadFromLocalStorage();

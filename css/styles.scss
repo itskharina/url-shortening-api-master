@@ -17,7 +17,6 @@ body {
 
 // COLOURS
 
-
 $cyan: hsl(180, 66%, 49%);
 $violet: hsl(257, 27%, 26%);
 $red: hsl(0, 87%, 67%);
@@ -152,6 +151,7 @@ p {
         @include flex(row);
         justify-content: space-between; 
         width: 50%;
+        min-width: 898px;
         border-radius: 10px;
         background-color: white;
         padding: 10px 25px;
@@ -171,12 +171,22 @@ p {
         }
 
         .left {
+            @include flex(row);
             width: 50%;
+            gap: 20px;
             
             p {
                 font-weight: 500;
                 color: $dark-blue;
                 font-size: 1rem;
+            }
+
+            button {
+                margin-left: 0;
+                padding: 0;
+                width: 10px;
+                background-color: white;
+                color: $cyan;
             }
         }
     }
