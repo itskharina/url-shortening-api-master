@@ -5,6 +5,8 @@ const copyBtn = document.querySelector('.copy');
 const linksContainer = document.querySelector('.links');
 const error = document.querySelector('.error');
 
+const existingUrls = JSON.parse(localStorage.getItem('existingUrls')) || [];
+
 async function shortenUrl(url) {
   const encoded = encodeURIComponent(url);
   const response = await fetch(
@@ -29,6 +31,9 @@ async function displayData(string) {
     error.style.display = 'none';
   }
   const { data, url } = await shortenUrl(string);
+  existingUrls.push({ url, shortenedUrl: data.shorturl });
+  localStorage.setItem('existingUrls', JSON.stringify(existingUrls));
+
   display.innerHTML += `
   <li>
     <div class='left'>
@@ -39,6 +44,15 @@ async function displayData(string) {
       <button class='copy'>Copy</button>
     </div>
   </li>`;
+}
+
+function isValidUrl(url) {
+  try {
+    new URL(url);
+    return true;
+  } catch (err) {
+    return false;
+  }
 }
 
 shortenBtn.addEventListener('click', function () {
@@ -53,11 +67,21 @@ linksContainer.addEventListener('click', function (e) {
   }
 });
 
-function isValidUrl(url) {
-  try {
-    new URL(url);
-    return true;
-  } catch (err) {
-    return false;
+function loadFromLocalStorage() {
+  if (existingUrls) {
+    existingUrls.forEach(({ url, shortenedUrl }) => {
+      display.innerHTML += `
+      <li>
+        <div class='left'>
+          <p>${url}</p>
+        </div>
+        <div class='right'>
+          <a href="${shortenedUrl}">${shortenedUrl}</a>
+          <button class='copy'>Copy</button>
+        </div>
+      </li>`;
+    });
   }
 }
+
+loadFromLocalStorage();
