@@ -3,6 +3,7 @@ const display = document.querySelector('.links');
 const shortenBtn = document.querySelector('.shorten');
 const copyBtn = document.querySelector('.copy');
 const linksContainer = document.querySelector('.links');
+const error = document.querySelector('.error');
 
 async function shortenUrl(url) {
   const encoded = encodeURIComponent(url);
@@ -17,11 +18,17 @@ async function shortenUrl(url) {
   return { data, url };
 }
 
-async function displayData(input) {
-  if (!input.value) {
+async function displayData(string) {
+  const validity = isValidUrl(string);
+  if (!validity || string.value === '') {
+    error.style.display = 'block';
+    input.style.border = '2px solid hsl(0, 87%, 67%)';
+    return;
+  } else {
+    input.style.border = 'none';
+    error.style.display = 'none';
   }
-
-  const { data, url } = await shortenUrl(input);
+  const { data, url } = await shortenUrl(string);
   display.innerHTML += `
   <li>
     <div class='left'>
@@ -45,3 +52,12 @@ linksContainer.addEventListener('click', function (e) {
     navigator.clipboard.writeText(link.textContent);
   }
 });
+
+function isValidUrl(url) {
+  try {
+    new URL(url);
+    return true;
+  } catch (err) {
+    return false;
+  }
+}

@@ -183,10 +183,10 @@ p {
 }
 
 .shorten-link {
-    @include flex(column);
-    align-items: normal;
+    @include flex(row);
     justify-content: center;
     position: absolute;
+    gap: 15px;
     z-index: 3;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -197,20 +197,16 @@ p {
     border-radius: 10px;
     background-image: url(../images/bg-shorten-desktop.svg);
 
-    .input {
-        @include flex(row);
-        justify-content: center;
-        gap: 15px;
-        margin-top: 30px;
-    }
-
     p {
-        margin-left: 55px;
+        display: none;
+        margin-left: 48px;
         margin-top: 8px;
         font-size: 0.9rem;
         font-style: italic;
-        color: red;
-
+        color: $red;
+        position: absolute;
+        bottom: 20px;
+        left: 8px;
     }
     
     input {

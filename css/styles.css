@@ -149,11 +149,11 @@ p {
 
 .shorten-link {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  align-items: normal;
   justify-content: center;
   position: absolute;
+  gap: 15px;
   z-index: 3;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -164,20 +164,16 @@ p {
   border-radius: 10px;
   background-image: url(../images/bg-shorten-desktop.svg);
 }
-.shorten-link .input {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 30px;
-}
 .shorten-link p {
-  margin-left: 55px;
+  display: none;
+  margin-left: 48px;
   margin-top: 8px;
   font-size: 0.9rem;
   font-style: italic;
-  color: red;
+  color: hsl(0, 87%, 67%);
+  position: absolute;
+  bottom: 20px;
+  left: 8px;
 }
 .shorten-link input {
   grid-area: input;
