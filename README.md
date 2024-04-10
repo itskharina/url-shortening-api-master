@@ -10,7 +10,7 @@
 ### The challenge
 
 - This is a solution to the [Shortly URL shortening API Challenge challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/url-shortening-api-landing-page-2ce3ob-G)
-- - Live demo: https://itskharina.github.io/url-shortening-api-master/
+- Live demo: https://itskharina.github.io/url-shortening-api-master/
 
 Users should be able to:
 
